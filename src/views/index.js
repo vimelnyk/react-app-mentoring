@@ -1,16 +1,10 @@
 import React from 'react';
+import Header from './header';
+import FilmList from './film-list';
 
 const App = () => (
   <>
-    <header className="header">
-      <div className="container">
-        <span className="header__logo">
-          Logo
-        </span>
-        <button type="button" className="header__button">+ Add Mowie</button>
-
-      </div>
-    </header>
+    <Header />
     <section className="intro">
 
       <div className="container">
@@ -39,7 +33,7 @@ const App = () => (
               Sort by
             </label>
             <select id="sortType">
-              <option selected="true">Release Date</option>
+              <option defaultValue>Release Date</option>
               <option>Rating</option>
             </select>
           </div>
@@ -48,25 +42,16 @@ const App = () => (
       <section className="film-list-container">
         <div className="container">
           <div className="row">
-            <ul className="film-list">
-              <li className="film-list__item">
-                <div className="film-item">
-                  <button type="button">Button</button>
-                  <figure className="film-item__main">
-                    <img src="/media/examples/elephant-660-480.jpg" alt="Elephant at sunset" />
-                    <figcaption className="film-caption">
-                      <h2>Title</h2>
-                      <span />
-                      <h3>Subtitle</h3>
-                    </figcaption>
-                  </figure>
-                </div>
-              </li>
-            </ul>
+            <FilmList />
           </div>
         </div>
       </section>
-      <footer className="footer">Footer</footer>
+      <footer className="footer">
+        <div className="container">
+          Footer
+
+        </div>
+      </footer>
 
     </main>
   </>
