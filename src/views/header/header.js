@@ -5,10 +5,12 @@ import './header.scss';
 const Header = () => (
   <header className="header">
     <div className="container">
-      <span className="header__logo">
-        Logo
-      </span>
-      <button type="button" className="header__button">+ Add Mowie</button>
+      <div className="row  justify-content-between align-items-center">
+        <span className="header__logo">Logo</span>
+        <button type="button" className="header__button">
+          + Add Mowie
+        </button>
+      </div>
     </div>
   </header>
 );
