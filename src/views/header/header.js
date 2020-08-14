@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import AddFilm from '../add-film';
 import './header.scss';
 
 const Header = () => (
@@ -7,15 +7,10 @@ const Header = () => (
     <div className="container">
       <div className="row  justify-content-between align-items-center">
         <span className="header__logo">Logo</span>
-        <button type="button" className="header__button">
-          + Add Mowie
-        </button>
+        <AddFilm label="Add Movie" />
       </div>
     </div>
   </header>
 );
-// Header.propTypes = {
-//   label: PropTypes.string.isRequired,
-// };
 
 export default Header;

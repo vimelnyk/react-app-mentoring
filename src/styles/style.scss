@@ -19,9 +19,14 @@ body {
     height: 100%;
 }
 
-body{
+body {
     font-family: Verdana, sans-serif;
     font-size: 16px;
-    color: white;
-    background-color: black;
+    color: $white;
+    background-color: $dark;
+    #root {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    } 
 }
