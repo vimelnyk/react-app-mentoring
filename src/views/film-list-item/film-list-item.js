@@ -10,7 +10,7 @@ const FilmListItem = ({
     <figure className="film-item__main">
       <img src={url} alt={title} className="film-item__image" />
       <figcaption className="film-item__caption caption">
-        <div className="caption__head d-flex justify-content-between align-items-center">
+        <div className="caption__head d-flex justify-content-between">
           <h2 className="caption__title">{title}</h2>
           <span className="caption__date">{year}</span>
         </div>

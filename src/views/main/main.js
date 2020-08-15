@@ -2,6 +2,7 @@ import React from 'react';
 import Toolkit from '../toolkit';
 import FilmList from '../film-list';
 import './main.scss';
+import ErrorBoundary from '../../containers/error-boundary';
 
 const Main = () => (
   <main className="main">
@@ -9,7 +10,9 @@ const Main = () => (
     <section className="film-list-container">
       <div className="container">
         <div className="row">
-          <FilmList />
+          <ErrorBoundary>
+            <FilmList />
+          </ErrorBoundary>
         </div>
       </div>
     </section>

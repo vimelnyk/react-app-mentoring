@@ -6,7 +6,7 @@ const Films = [{
   id: '1a',
 },
 {
-  title: 'Film2',
+  title: 'Film7',
   description: 'Film2 description',
   url: '../../img/mock/2.jpg',
   year: '2010',
