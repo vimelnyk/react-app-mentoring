@@ -2,8 +2,8 @@ import React from 'react';
 import './toolkit-result.scss';
 
 const ToolkitResult = () => (
-  <span>
-    <b>00</b>
+  <span className="toolkit-result">
+    <b>4 </b>
     movies found
   </span>
 );

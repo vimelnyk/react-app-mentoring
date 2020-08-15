@@ -1,6 +1,5 @@
 import React from 'react';
 import Toolkit from '../toolkit';
-
 import FilmList from '../film-list';
 import './main.scss';
 

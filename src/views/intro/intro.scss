@@ -1,8 +1,8 @@
-@import '../../styles/style.scss';
+@import '../../styles/global.scss';
 
 .intro {
     position: relative;
-    min-height: 300px;    
+    min-height: 300px;
     overflow: hidden;
     &::before {
         position: absolute;

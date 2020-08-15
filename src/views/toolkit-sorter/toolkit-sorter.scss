@@ -1,0 +1,26 @@
+@import '../../styles/global.scss';
+.toolkit-sorter{
+  display: flex;
+  &__label {
+    color:$base-1;
+    text-transform: uppercase;
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    font-size:0.8rem;
+  }
+  &__select-control {
+    display: inline-block;
+  }
+  &__select{
+    display: inline-block;
+    height: 2rem;
+    line-height: 1.5rem;
+    text-transform: uppercase;
+    color:$white;
+    border:0;
+    background-color: $dark;
+    cursor: pointer;
+    font-size:0.8rem;
+  }
+}

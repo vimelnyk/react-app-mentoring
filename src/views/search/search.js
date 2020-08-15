@@ -4,7 +4,7 @@ import './search.scss';
 
 const Search = ({ label, buttonLabel, placeholder }) => (
   <form className="search-form">
-    <label htmlFor="Search" className="search-form__label">
+    <label htmlFor="Search" className="search-form__label mb-3">
       {label}
     </label>
     <div className="search-form__group">

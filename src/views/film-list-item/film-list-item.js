@@ -9,10 +9,15 @@ const FilmListItem = ({
     <button type="button" className="film-item__button" aria-label="Edit options" />
     <figure className="film-item__main">
       <img src={url} alt={title} className="film-item__image" />
-      <figcaption className="film-item__caption">
-        <h2>{title}</h2>
-        <span>{year}</span>
-        <h3>{description}</h3>
+      <figcaption className="film-item__caption caption">
+        <div className="caption__head d-flex justify-content-between align-items-center">
+          <h2 className="caption__title">{title}</h2>
+          <span className="caption__date">{year}</span>
+        </div>
+        <div className="caption__body">
+          <h3 className="caption__subtitle">{description}</h3>
+        </div>
+
       </figcaption>
     </figure>
   </div>

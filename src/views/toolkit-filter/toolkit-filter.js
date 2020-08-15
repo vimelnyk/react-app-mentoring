@@ -1,13 +1,12 @@
 import React from 'react';
 import './toolkit-filter.scss';
+import FilterNames from '../../constants/filter-names';
 
 const ToolkitFilter = () => (
   <div className="toolkit-filter">
-    <button type="button">All</button>
-    <button type="button">Documentary</button>
-    <button type="button">Comedy</button>
-    <button type="button">Horror</button>
-    <button type="button">Crime</button>
+    {FilterNames.map((name) => (
+      <button type="button" className="toolkit-filter__button" key={name.id}>{name.name}</button>
+    ))}
   </div>
 );
 

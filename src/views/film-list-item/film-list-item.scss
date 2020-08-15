@@ -1,4 +1,4 @@
-@import '../../styles/style.scss';
+@import '../../styles/global.scss';
 
 .film-item {
     position: relative;
@@ -22,8 +22,8 @@
             display: inline-block;
             content:"...";
             transform: rotate(90deg);
-            font-size: 1.5rem;            
-            
+            font-size: 1.5rem;
+
         }
     }
 
@@ -37,4 +37,26 @@
         width: 100%;
         min-width: 100%;
     }
+}
+
+.caption {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  &__head{
+    padding-bottom: 0.5rem;
+  }
+  &__title {
+    font-size:1rem;
+    font-weight: normal;
+  }
+  &__date {
+    border: 1px solid $white;
+    padding:  3px 10px;
+    font-size: 0.7rem;
+    border-radius:4px;
+  }
+  &__subtitle {
+    font-weight: normal;
+    font-size: 0.8rem;
+  }
 }
