@@ -6,28 +6,35 @@ class ErrorBoundary extends Component {
     super(props);
 
     this.state = {
-      hasError: false,
+      error: null,
+      errorInfo: null,
     };
   }
 
-  static getDerivedStateFromError(error) {
-    if (error) {
-      return {
-        hasError: true,
-      };
-    }
-    return {
-      hasError: false,
-    };
+  componentDidCatch(error, errorInfo) {
+    this.setState({
+      error,
+      errorInfo,
+    });
   }
 
   render() {
-    const { hasError } = this.state;
+    const { error, errorInfo } = this.state;
     const { children } = this.props;
 
-    if (hasError) {
-      return <h2>Something went wrong</h2>;
+    if (errorInfo) {
+      return (
+        <div>
+          <h2>Something went wrong.</h2>
+          <details style={{ whiteSpace: 'pre-wrap' }}>
+            {error && error.toString()}
+            <br />
+            {errorInfo.componentStack}
+          </details>
+        </div>
+      );
     }
+
     return children;
   }
 }
