@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './film-list-item.scss';
+import EditDelete from '../edit-delete';
 
 const FilmListItem = ({
-  title, url, year, description,
+  title,
+  url,
+  year,
+  description,
+  openPopup,
+  openDeletePopup,
 }) => (
   <div className="film-item">
-    <button type="button" className="film-item__button" aria-label="Edit options" />
+    <EditDelete openPopup={openPopup} openDeletePopup={openDeletePopup} />
     <figure className="film-item__main">
       <img src={url} alt={title} className="film-item__image" />
       <figcaption className="film-item__caption caption">
@@ -17,7 +23,6 @@ const FilmListItem = ({
         <div className="caption__body">
           <h3 className="caption__subtitle">{description}</h3>
         </div>
-
       </figcaption>
     </figure>
   </div>
@@ -27,6 +32,8 @@ FilmListItem.propTypes = {
   url: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  openPopup: PropTypes.func.isRequired,
+  openDeletePopup: PropTypes.func.isRequired,
 };
 
 export default FilmListItem;

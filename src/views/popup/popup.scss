@@ -1,0 +1,66 @@
+@import '../../styles/global.scss';
+
+.overlay {
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:20;
+  background-color: rgba($base-1, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.popup {
+   position: fixed;
+   top:50%;
+   left:50%;
+   transform: translate(-50%, -50%);
+   padding:40px;
+   z-index: 21;
+   background-color: $dark;
+   min-width:300px;
+   width:50vw;
+   max-height:100vh;
+  max-width:100vw;
+  overflow-x: hidden;
+  overflow-y:auto;
+  &__button{
+    position: absolute;
+    top:15px;
+    right:15px;
+    width:30px;
+    height:30px;
+    appearance: none;
+    background-color: transparent;
+    border:none;
+    cursor: pointer;
+    i{
+      position: absolute;
+      top:0;
+      left:0;
+      display: inline-block;
+      transform: rotate(45deg);
+       width:30px;
+       height:30px;
+      &::before, &::after {
+        position: absolute;
+        display: inline-block;
+        content: '';
+        background-color: $white;
+         top: 50%;
+          left: 50%;
+          transform:   translate(-50%, -50%);
+      }
+      &::before{
+        height:1px;
+        width:30px;
+      }
+      &::after {
+        height: 30px;
+        width: 1px;
+      }
+    }
+
+  }
+}
