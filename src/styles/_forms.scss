@@ -1,0 +1,144 @@
+.bttn{
+   cursor: pointer;
+   appearance: none;
+   display: inline-block;
+   min-width: 100px;
+   padding:1rem;
+   text-transform: uppercase;
+   border: 2px solid;
+   border-radius:4px;
+   &--invert {
+    @include colored_button($main, transparent, $main, $white, $main, $main);
+   }
+   &--general {
+    @include colored_button($white, $main, $main, $main, transparent, $main);
+   }
+
+}
+
+%appearance{
+      background-color: $base-1;
+      appearance: none;
+      display: block;
+      width:100%;
+      color:$white;
+      border-radius: 4px;
+      border:none;
+      padding:10px;
+}
+.form-control {
+  margin-bottom: 20px;
+  &__label {
+    display: block;
+    text-transform: uppercase;
+    color:$main;
+    margin-bottom: 10px;
+  }
+  &__input{
+    @extend %appearance;
+  }
+}
+
+.custom-select {
+  appearance: none;
+  padding:0;
+  border:0;
+  &__button{
+    @extend %appearance;
+    cursor: pointer;
+    padding-right: 30px;
+    text-align: left;
+    position: relative;
+    &::after{
+      position: absolute;
+      right:5px;
+      top:18px;
+      content:'';
+      width:0;
+      height:0;
+      border:5px solid transparent;
+      border-top:5px solid $main;
+    }
+  }
+  &__dropdown{
+    padding:10px;
+    display: none;
+    &.active{
+      display: block;
+    }
+  }
+  &__checkbox{
+    position: relative;
+    padding:5px 5px 5px 30px;
+    display: block;
+    cursor: pointer;
+  }
+  &__icon {
+    position: absolute;
+    left:0;
+    width:16px;
+    height:16px;
+    border-radius:4px;
+    background-color: $white;
+    @include transitions;
+    &::after{
+      position: absolute;
+      top:4px;
+      left:3px;
+      content:'';
+      display: inline-block;
+      width:10px;
+      height:5px;
+      border-bottom:2px solid $white;
+      border-left:2px solid $white;
+      transform: rotate(-45deg);
+      opacity:0;
+    }
+  }
+  &__input{
+    position: absolute;
+    width:1px;
+    height:1px;
+    opacity: 1;
+    &:checked{
+      +.custom-select__icon {
+        background-color: $main;
+        &::after{
+           opacity:1;
+        }
+      }
+    }
+  }
+}
+
+.custom-date{
+  position: relative;
+  background-color: $base-1;
+  border-radius: 4px;
+  svg{
+    position: absolute;
+    width:16px;
+    height:16px;
+    right:5px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index: 0;
+  }
+  &__input{
+    position: relative;
+    z-index: 1;
+      appearance: none;
+      display: block;
+      width:100%;
+      color:$white;
+      border-radius: 4px;
+      border:none;
+      padding:10px;
+      background-color: transparent;
+      &::-webkit-inner-spin-button,
+     &::-webkit-calendar-picker-indicator {opacity: 0;
+      cursor: pointer;
+    appearance:none;}
+  }
+
+}
