@@ -9,8 +9,26 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      items: [],
       showPopup: false,
     };
+  }
+
+  componentDidMount() {
+    fetch('/mock/film-mock.json')
+      .then((res) => res.json())
+      .then((result) => {
+        this.setState({
+          items: result.data,
+        });
+        console.log(result);
+      })
+      .catch((error) => {
+        this.setState({
+          items: [],
+        });
+        console.log(error);
+      });
   }
 
   openPopup(value) {
@@ -32,13 +50,14 @@ class App extends React.Component {
   }
 
   render() {
-    const { showPopup } = this.state;
+    const { showPopup, items } = this.state;
     return (
       <>
         <Header openPopup={() => this.openPopup('addMovie')} />
         <Intro />
         <Main
           openPopup={() => this.openPopup('editMovie')}
+          items={items}
           openDeletePopup={() => this.openPopup('deleteMovie')}
         />
         <Footer />

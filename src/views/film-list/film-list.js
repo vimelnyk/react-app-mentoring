@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FilmListItem from '../film-list-item';
-import Films from '../../constants/film-mock';
 import './film-list.scss';
 
-const FilmList = ({ openPopup, openDeletePopup }) => (
+const FilmList = ({ openPopup, openDeletePopup, items }) => (
   <ul className="film-list">
-    {Films.map((film) => (
+    {items.map((film) => (
       <li className="film-list__item col col-lg-4 mb-3" key={film.id}>
         <FilmListItem
           title={film.title}
@@ -26,4 +25,5 @@ export default FilmList;
 FilmList.propTypes = {
   openPopup: PropTypes.func.isRequired,
   openDeletePopup: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

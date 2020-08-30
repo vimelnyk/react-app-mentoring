@@ -5,14 +5,18 @@ import FilmList from '../film-list';
 import './main.scss';
 import ErrorBoundary from '../../containers/error-boundary';
 
-const Main = ({ openPopup, openDeletePopup }) => (
+const Main = ({ openPopup, openDeletePopup, items }) => (
   <main className="main">
     <Toolkit />
     <section className="film-list-container">
       <div className="container">
         <div className="row">
           <ErrorBoundary>
-            <FilmList openPopup={openPopup} openDeletePopup={openDeletePopup} />
+            <FilmList
+              openPopup={openPopup}
+              openDeletePopup={openDeletePopup}
+              items={items}
+            />
           </ErrorBoundary>
         </div>
       </div>
@@ -24,4 +28,5 @@ export default Main;
 Main.propTypes = {
   openPopup: PropTypes.func.isRequired,
   openDeletePopup: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
