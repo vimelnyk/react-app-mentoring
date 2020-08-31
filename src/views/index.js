@@ -3,14 +3,16 @@ import Header from './header';
 import Intro from './intro';
 import Footer from './footer';
 import Main from './main';
-import Popup from './popup';
+import AddPopupIntro from './add-popup-intro';
+import EditPopupIntro from './edit-popup-intro';
+import DeletePopupIntro from './delete-popup-intro';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       items: [],
-      showPopup: false,
+      showPopup: '',
     };
   }
 
@@ -37,7 +39,7 @@ class App extends React.Component {
 
   closePopup() {
     this.setState({
-      showPopup: false,
+      showPopup: '',
     });
   }
 
@@ -61,14 +63,24 @@ class App extends React.Component {
           openDeletePopup={() => this.openPopup('deleteMovie')}
         />
         <Footer />
-        {showPopup !== false ? (
-          <Popup
+
+        {showPopup === 'addMovie' && (
+          <AddPopupIntro
             closePopup={() => this.closePopup()}
             resetForm={() => this.resetForm()}
             submitForm={() => this.submitForm()}
-            showPopup={showPopup}
           />
-        ) : null}
+        )}
+        {showPopup === 'editMovie' && (
+          <EditPopupIntro
+            closePopup={() => this.closePopup()}
+            resetForm={() => this.resetForm()}
+            submitForm={() => this.submitForm()}
+          />
+        )}
+        {showPopup === 'deleteMovie' && (
+          <DeletePopupIntro closePopup={() => this.closePopup()} />
+        )}
       </>
     );
   }
