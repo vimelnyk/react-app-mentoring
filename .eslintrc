@@ -6,10 +6,24 @@
         "jest": true,
         "commonjs": true
     },
+    "plugins": [
+        "jsx-a11y"
+    ],    
     "rules": {
         "react/jsx-filename-extension": [1, {
             "extensions": [".js", ".jsx"]
-        }]
+        }],
+        "jsx-a11y/label-has-associated-control": [
+           "error",
+           {
+             "labelComponents": [],
+             "labelAttributes": [],
+             "controlComponents": [],
+             "assert": "either",
+             "depth": 25
+           }
+        ],
+        "linebreak-style": 0
     }
 }
 /*eslint linebreak-style: ["error", "windows"]*/

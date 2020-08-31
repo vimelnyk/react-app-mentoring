@@ -1,8 +1,15 @@
 import React from 'react';
+import Header from './header';
+import Intro from './intro';
+import Footer from './footer';
+import Main from './main';
 
 const App = () => (
-  <h1>
-    Hello World!!
-  </h1>
+  <>
+    <Header />
+    <Intro />
+    <Main />
+    <Footer />
+  </>
 );
 export default App;

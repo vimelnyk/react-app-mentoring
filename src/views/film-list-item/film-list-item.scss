@@ -1,0 +1,62 @@
+@import '../../styles/global.scss';
+
+.film-item {
+    position: relative;
+
+    &__button {
+        position: absolute;
+        top:10px;
+        right: 10px;
+        opacity: 0;
+        color: $white;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        background-color: $base;
+        border-radius: 100%;
+        appearance: none;
+        border:none;
+        overflow: hidden;
+        padding-left: 11px;
+        &::after{
+            display: inline-block;
+            content:"...";
+            transform: rotate(90deg);
+            font-size: 1.5rem;
+
+        }
+    }
+
+    &:hover {
+        .film-item__button {
+            opacity: 1;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+.caption {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  &__head{
+    padding-bottom: 0.5rem;
+  }
+  &__title {
+    font-size:1rem;
+    font-weight: normal;
+  }
+  &__date {
+    border: 1px solid $white;
+    padding:  3px 10px;
+    font-size: 0.7rem;
+    border-radius:4px;
+  }
+  &__subtitle {
+    font-weight: normal;
+    font-size: 0.8rem;
+  }
+}
