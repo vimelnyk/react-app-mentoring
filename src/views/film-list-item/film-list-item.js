@@ -4,14 +4,22 @@ import './film-list-item.scss';
 import EditDelete from '../edit-delete';
 
 const FilmListItem = ({
+  id,
   title,
   url,
   year,
   description,
   openPopup,
   openDeletePopup,
+  changeCurrentItem,
 }) => (
-  <div className="film-item">
+  <div
+    className="film-item"
+    role="button"
+    onKeyPress={() => changeCurrentItem(id)}
+    onClick={() => changeCurrentItem(id)}
+    tabIndex="0"
+  >
     <EditDelete openPopup={openPopup} openDeletePopup={openDeletePopup} />
     <figure className="film-item__main">
       <img src={url} alt={title} className="film-item__image" />
@@ -28,12 +36,14 @@ const FilmListItem = ({
   </div>
 );
 FilmListItem.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   openPopup: PropTypes.func.isRequired,
   openDeletePopup: PropTypes.func.isRequired,
+  changeCurrentItem: PropTypes.func.isRequired,
 };
 
 export default FilmListItem;

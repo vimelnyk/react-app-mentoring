@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './header';
 import Intro from './intro';
 import Footer from './footer';
@@ -7,82 +7,90 @@ import AddPopupIntro from './add-popup-intro';
 import EditPopupIntro from './edit-popup-intro';
 import DeletePopupIntro from './delete-popup-intro';
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      items: [],
-      showPopup: '',
-    };
-  }
+function App() {
+  const [items, setItems] = useState([]);
+  const [showPopup, setShowPopup] = useState('');
+  const [currentItem, setCurrentItem] = useState('');
+  const [currentItemFull, setCurrentItemFull] = useState({});
 
-  componentDidMount() {
-    fetch('/mock/film-mock.json')
-      .then((res) => res.json())
-      .then((result) => {
-        this.setState({
-          items: result.data,
-        });
-        console.log(result);
-      })
-      .catch((error) => {
-        this.setState({
-          items: [],
-        });
-        console.log(error);
+  const getCurrentFilm = (id) => {
+    const arr = items.filter((item) => item.id === id);
+    return arr[0];
+  };
+
+  async function fetchData() {
+    const res = await fetch('/mock/film-mock.json');
+    res
+      .json()
+      .then((result) => setItems(result.data))
+      .catch((err) => {
+        console.log(err);
+        setItems([]);
       });
   }
 
-  openPopup(value) {
-    this.setState({ showPopup: value });
-  }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  closePopup() {
-    this.setState({
-      showPopup: '',
-    });
-  }
+  const openPopup = (value) => {
+    setShowPopup(value);
+  };
 
-  resetForm() {
-    this.closePopup();
-  }
+  const closePopup = () => {
+    setShowPopup('');
+  };
 
-  submitForm() {
-    this.closePopup();
-  }
+  const resetForm = () => {
+    closePopup();
+  };
 
-  render() {
-    const { showPopup, items } = this.state;
-    return (
-      <>
-        <Header openPopup={() => this.openPopup('addMovie')} />
-        <Intro />
-        <Main
-          openPopup={() => this.openPopup('editMovie')}
-          items={items}
-          openDeletePopup={() => this.openPopup('deleteMovie')}
+  const submitForm = () => {
+    closePopup();
+  };
+
+  const changeCurrentItem = (id) => {
+    setCurrentItem(id);
+    setCurrentItemFull(getCurrentFilm(id));
+  };
+
+  return (
+    <>
+      <Header
+        openPopup={openPopup}
+        changeCurrentItem={changeCurrentItem}
+        currentItem={currentItem}
+      />
+      <Intro
+        currentItem={currentItem}
+        currentItemFull={currentItemFull}
+      />
+      <Main
+        openPopup={openPopup}
+        items={items}
+        openDeletePopup={openPopup}
+        changeCurrentItem={changeCurrentItem}
+      />
+      <Footer />
+      {showPopup === 'addMovie' && (
+        <AddPopupIntro
+          closePopup={closePopup}
+          resetForm={resetForm}
+          submitForm={submitForm}
         />
-        <Footer />
-
-        {showPopup === 'addMovie' && (
-          <AddPopupIntro
-            closePopup={() => this.closePopup()}
-            resetForm={() => this.resetForm()}
-            submitForm={() => this.submitForm()}
-          />
-        )}
-        {showPopup === 'editMovie' && (
-          <EditPopupIntro
-            closePopup={() => this.closePopup()}
-            resetForm={() => this.resetForm()}
-            submitForm={() => this.submitForm()}
-          />
-        )}
-        {showPopup === 'deleteMovie' && (
-          <DeletePopupIntro closePopup={() => this.closePopup()} />
-        )}
-      </>
-    );
-  }
+      )}
+      {showPopup === 'editMovie' && (
+        <EditPopupIntro
+          closePopup={closePopup}
+          resetForm={resetForm}
+          submitForm={submitForm}
+        />
+      )}
+      {showPopup === 'deleteMovie' && (
+        <DeletePopupIntro closePopup={closePopup} />
+      )}
+    </>
+  );
 }
+
 export default App;

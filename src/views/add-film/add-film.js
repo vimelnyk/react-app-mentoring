@@ -6,7 +6,7 @@ const AddFilm = ({ label, openPopup }) => (
   <button
     type="button"
     className="add-film-button"
-    onClick={() => openPopup()}
+    onClick={() => openPopup('addMovie')}
   >
     +
     {label}

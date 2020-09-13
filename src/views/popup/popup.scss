@@ -26,31 +26,23 @@
   overflow-x: hidden;
   overflow-y:auto;
   &__button{
-    position: absolute;
-    top:15px;
-    right:15px;
-    width:30px;
-    height:30px;
+    @include posAbs(15px, 15px, auto, auto);
+    @include square(30px);
     appearance: none;
     background-color: transparent;
     border:none;
     cursor: pointer;
     i{
-      position: absolute;
-      top:0;
-      left:0;
+      @include posAbs(0, auto, auto, 0);
       display: inline-block;
       transform: rotate(45deg);
-       width:30px;
-       height:30px;
+      @include square(30px);
       &::before, &::after {
-        position: absolute;
+        @include posAbs(50%, auto, auto, 50%);
         display: inline-block;
         content: '';
+        transform: translate(-50%, -50%);
         background-color: $white;
-         top: 50%;
-          left: 50%;
-          transform:   translate(-50%, -50%);
       }
       &::before{
         height:1px;

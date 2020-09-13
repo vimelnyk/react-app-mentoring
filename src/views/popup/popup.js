@@ -5,7 +5,11 @@ import './popup.scss';
 
 const Popup = ({ closePopup, children }) => (
   <>
-    <div onClick={() => closePopup()} className="overlay" aria-hidden="true" />
+    <div
+      onClick={() => closePopup()}
+      className="overlay"
+      aria-hidden="true"
+    />
     <div className="popup">
       <button
         onClick={() => closePopup()}

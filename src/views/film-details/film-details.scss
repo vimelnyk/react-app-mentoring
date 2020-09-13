@@ -1,0 +1,65 @@
+@import '../../styles/global.scss';
+
+.intro {
+    position: relative;
+    min-height: 300px;
+    overflow: hidden;
+    &::before {
+      @include posAbs;
+      content:"";
+      background: url('../../img/background.jpg') no-repeat center;
+      background-size: cover;
+      filter: blur(8px);
+      z-index: 0;
+      opacity: 0.5;
+    }
+}
+
+
+
+.film-figure {
+  &__img {
+    max-width:100%;
+    width: 100%;
+  }
+}
+
+.film-details {
+  padding: 2rem 1.5rem;
+  &__head{
+    display: flex;
+    align-items: center;
+  }
+  &__title {
+    font-size:2.8rem;
+    text-transform: capitalize;
+    font-weight: normal;
+    display: inline-block;
+  }
+  &__rating{
+    border: 1px solid $white;
+    color: green;
+    border-radius: 100%;
+    display: inline-flex;
+    @include square(46px);
+    font-size: 1.2rem;
+    font-style: normal;
+    align-items: center;
+    justify-content: center;
+  }
+  &__subtitle{
+    font-weight: normal;
+    font-size: 0.9rem;
+  }
+  &__body{
+    font-family:$secondaryFontFamily;
+    font-size: 0.875rem;
+  }
+}
+
+.params {
+  &__item {
+    color: $main;
+    font-size: 1.5rem;
+  }
+}

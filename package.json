@@ -15,6 +15,7 @@
   "browserslist": "defaults",
   "devDependencies": {
     "@babel/core": "^7.11.0",
+    "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/polyfill": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
@@ -42,6 +43,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@babel/runtime": "^7.11.2",
     "autoprefixer": "^9.8.6",
     "bootstrap-4-grid": "^3.4.0",
     "bootstrap-utilities": "^4.1.3",
