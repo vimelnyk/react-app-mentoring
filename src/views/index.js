@@ -19,7 +19,7 @@ function App() {
   };
 
   async function fetchData() {
-    const res = await fetch('/mock/film-mock.json');
+    const res = await fetch('http://localhost:4000/movies');
     res
       .json()
       .then((result) => setItems(result.data))

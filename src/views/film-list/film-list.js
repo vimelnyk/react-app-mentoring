@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FilmListItem from '../film-list-item';
+import convertYearView from '../../utilities/convertYearView';
 import './film-list.scss';
 
 const FilmList = ({
@@ -12,9 +13,9 @@ const FilmList = ({
         <FilmListItem
           id={film.id}
           title={film.title}
-          description={film.description}
-          url={film.url}
-          year={film.year}
+          description={film.tagline}
+          url={film.poster_path}
+          year={convertYearView(film.release_date)}
           openPopup={openPopup}
           openDeletePopup={openDeletePopup}
           changeCurrentItem={changeCurrentItem}

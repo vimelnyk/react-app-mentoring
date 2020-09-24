@@ -36,7 +36,7 @@ const FilmListItem = ({
   </div>
 );
 FilmListItem.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
