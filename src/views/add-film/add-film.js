@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './add-film.scss';
+import { connect } from 'react-redux';
+import { getPopupCondition } from '../../actions/filmActions';
 
-const AddFilm = ({ label, openPopup }) => (
+const AddFilm = ({ label, getPopupCondition }) => (
   <button
     type="button"
     className="add-film-button"
-    onClick={() => openPopup('addMovie')}
+    onClick={() => getPopupCondition('addMovie')}
   >
     +
     {label}
@@ -14,7 +16,7 @@ const AddFilm = ({ label, openPopup }) => (
 );
 AddFilm.propTypes = {
   label: PropTypes.string.isRequired,
-  openPopup: PropTypes.func.isRequired,
+  getPopupCondition: PropTypes.func.isRequired,
 };
 
-export default AddFilm;
+export default connect(null, { getPopupCondition })(AddFilm);

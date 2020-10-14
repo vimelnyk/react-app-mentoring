@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import AddFilm from '../add-film';
 import SearchBackBtn from '../search-back-btn';
 import Logo from '../logo';
 import './header.scss';
 
-const Header = ({ openPopup, currentItem, changeCurrentItem }) => (
+const Header = ({ filmItem }) => (
   <header className="header">
     <div className="container">
       <div className="row ">
         <div className="col d-flex  justify-content-between align-items-center">
           <Logo />
-          {!currentItem && <AddFilm label="Add Movie" openPopup={openPopup} />}
-          {currentItem !== '' && (
+          {JSON.stringify(filmItem) === '{}' && (
+            <AddFilm label="Add Movie" />
+          )}
+          {JSON.stringify(filmItem) !== '{}' && (
             <SearchBackBtn
               label="Find Your Movie"
-              changeCurrentItem={changeCurrentItem}
             />
           )}
         </div>
@@ -24,9 +26,11 @@ const Header = ({ openPopup, currentItem, changeCurrentItem }) => (
   </header>
 );
 
-export default Header;
+const mapStateToProps = (state) => ({
+  filmItem: state.films.currentItem,
+});
+export default connect(mapStateToProps)(Header);
+
 Header.propTypes = {
-  openPopup: PropTypes.func.isRequired,
-  currentItem: PropTypes.string.isRequired,
-  changeCurrentItem: PropTypes.func.isRequired,
+  filmItem: PropTypes.shape({ root: PropTypes.string }.isRequired),
 };

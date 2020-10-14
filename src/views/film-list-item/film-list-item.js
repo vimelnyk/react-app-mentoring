@@ -1,28 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './film-list-item.scss';
+import { connect } from 'react-redux';
 import EditDelete from '../edit-delete';
+import { getItem } from '../../actions/filmActions';
 
 const FilmListItem = ({
+  getCurrentFilmItem,
   id,
   title,
   url,
   year,
   description,
-  openPopup,
-  openDeletePopup,
-  changeCurrentItem,
 }) => (
   <div
     className="film-item"
     role="button"
-    onKeyPress={() => changeCurrentItem(id)}
-    onClick={() => changeCurrentItem(id)}
+    onKeyPress={() => getCurrentFilmItem(id)}
+    onClick={() => getCurrentFilmItem(id)}
     tabIndex="0"
   >
-    <EditDelete openPopup={openPopup} openDeletePopup={openDeletePopup} />
+    <EditDelete id={id} />
     <figure className="film-item__main">
-      <img src={url} alt={title} className="film-item__image" />
+      <img
+        src={url}
+        alt={title}
+        className="film-item__image"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = '/img/mock/image.jpg';
+        }}
+      />
       <figcaption className="film-item__caption caption">
         <div className="caption__head d-flex justify-content-between">
           <h2 className="caption__title">{title}</h2>
@@ -41,9 +49,7 @@ FilmListItem.propTypes = {
   url: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  openPopup: PropTypes.func.isRequired,
-  openDeletePopup: PropTypes.func.isRequired,
-  changeCurrentItem: PropTypes.func.isRequired,
+  getCurrentFilmItem: PropTypes.func.isRequired,
 };
 
-export default FilmListItem;
+export default connect(null, { getCurrentFilmItem: getItem })(FilmListItem);

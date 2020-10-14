@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import './edit-delete.scss';
+import { getPopupCondition } from '../../actions/filmActions';
 
-function EditDelete({ openPopup, openDeletePopup }) {
+function EditDelete({ getPopupCondition }) {
   const [isOpen, setIsOpen] = useState(false);
   const openDropdown = () => {
     setIsOpen(true);
@@ -32,14 +34,14 @@ function EditDelete({ openPopup, openDeletePopup }) {
         <button
           type="button"
           className="edit-delete__button"
-          onClick={() => openPopup('editMovie')}
+          onClick={() => getPopupCondition('editMovie')}
         >
           Edit
         </button>
         <button
           type="button"
           className="edit-delete__button"
-          onClick={() => openDeletePopup('deleteMovie')}
+          onClick={() => getPopupCondition('deleteMovie')}
         >
           Delete
         </button>
@@ -48,8 +50,8 @@ function EditDelete({ openPopup, openDeletePopup }) {
   );
 }
 
-export default EditDelete;
+export default connect(null, { getPopupCondition })(EditDelete);
+
 EditDelete.propTypes = {
-  openPopup: PropTypes.func.isRequired,
-  openDeletePopup: PropTypes.func.isRequired,
+  getPopupCondition: PropTypes.func.isRequired,
 };

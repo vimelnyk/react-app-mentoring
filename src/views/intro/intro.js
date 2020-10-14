@@ -1,28 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Search from '../search';
 import FilmDetails from '../film-details';
 import './intro.scss';
 
-const Intro = ({ currentItem, currentItemFull }) => (
+const Intro = ({ filmItem }) => (
   <section className="intro d-flex align-items-center">
     <div className="container">
-      {!currentItem && (
+      {JSON.stringify(filmItem) === '{}' && (
       <Search
         label="Find Your Movie"
         placeholder="What do you want to watch?"
         buttonLabel="Search"
       />
       )}
-      {currentItem !== '' && <FilmDetails item={currentItemFull} />}
+      {JSON.stringify(filmItem) !== '{}' && <FilmDetails item={filmItem} />}
     </div>
   </section>
 );
 
-export default Intro;
+const mapStateToProps = (state) => ({
+  filmItem: state.films.currentItem,
+});
+export default connect(mapStateToProps)(Intro);
 
 Intro.defaultProps = {
-  currentItemFull: {
+  filmItem: {
     title: 'Film1',
     description: 'Film1 description',
     url: '../../img/mock/1.jpg',
@@ -36,6 +40,5 @@ Intro.defaultProps = {
 };
 
 Intro.propTypes = {
-  currentItem: PropTypes.string.isRequired,
-  currentItemFull: PropTypes.shape({ root: PropTypes.string }.isRequired),
+  filmItem: PropTypes.shape({ root: PropTypes.string }.isRequired),
 };

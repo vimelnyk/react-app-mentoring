@@ -1,15 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import useToggle from '../../utilities/useToggle';
 import FilterNames from '../../constants/filter-names';
 import Popup from '../popup';
 import './add-popup-intro.scss';
+import { createFilm } from '../../actions/filmActions';
 
-function AddPopupIntro({ submitForm, resetForm, closePopup }) {
+function AddPopupIntro({ createFilm }) {
   const [toggle, setToggle] = useToggle(false);
+  const [title, setTitle] = useState('');
+  const [posterPath, setPosterPath] = useState('');
+  const [releaseDate, setReleaseDate] = useState('');
+  const [runtime, setRuntime] = useState(0);
+  const [genres, setGenres] = useState([]);
+  const [overview, setOverview] = useState('');
+
+  const onCheckboxChange = (e) => {
+    const gr = genres;
+    const el = e.target.value;
+    if (gr.includes(el)) {
+      const needed = gr.filter((genre) => genre !== el);
+      setGenres(needed);
+    } else {
+      gr.push(el);
+      setGenres(gr);
+    }
+  };
+
+  const onReset = () => {
+    setTitle('');
+    setPosterPath('');
+    setReleaseDate('');
+    setGenres([]);
+    setRuntime(0);
+    setOverview('');
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const film = {
+      title,
+      poster_path: posterPath,
+      release_date: releaseDate,
+      overview,
+      runtime,
+      genres,
+    };
+    createFilm(film);
+  };
   return (
-    <Popup closePopup={closePopup}>
-      <form>
+    <Popup>
+      <form onSubmit={(e) => onSubmit(e)}>
         <h2 className="heading mb-4">Add Movie</h2>
         <div className="form-control">
           <label htmlFor="title" className="form-control__label">
@@ -21,6 +64,9 @@ function AddPopupIntro({ submitForm, resetForm, closePopup }) {
             name="title"
             placeholder="Enter title"
             className="form-control__input"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            required
           />
         </div>
         <div className="form-control">
@@ -31,9 +77,12 @@ function AddPopupIntro({ submitForm, resetForm, closePopup }) {
             <input
               id="date"
               type="date"
-              name="date"
+              name="releaseDate"
               placeholder="Select Date"
               className="custom-date__input"
+              onChange={(e) => setReleaseDate(e.target.value)}
+              value={releaseDate}
+              required
             />
             <svg
               version="1.1"
@@ -50,15 +99,18 @@ function AddPopupIntro({ submitForm, resetForm, closePopup }) {
           </div>
         </div>
         <div className="form-control">
-          <label htmlFor="url" className="form-control__label">
+          <label htmlFor="posterPath" className="form-control__label">
             Movie Url
           </label>
           <input
-            id="url"
+            id="posterPath"
             type="text"
-            name="url"
+            name="posterPath"
             placeholder="Enter Movie Url"
             className="form-control__input"
+            onChange={(e) => setPosterPath(e.target.value)}
+            value={posterPath}
+            required
           />
         </div>
         <fieldset className="form-control custom-select">
@@ -75,9 +127,15 @@ function AddPopupIntro({ submitForm, resetForm, closePopup }) {
           <div
             className={`custom-select__dropdown ${toggle ? 'active' : null}`}
           >
-            {FilterNames.map((name) => (
+            {FilterNames.slice(1).map((name) => (
               <label className="custom-select__checkbox" key={name.id}>
-                <input type="checkbox" className="custom-select__input" />
+                <input
+                  name="genres"
+                  type="checkbox"
+                  className="custom-select__input"
+                  onChange={(e) => onCheckboxChange(e)}
+                  value={name.name}
+                />
                 <i className="custom-select__icon" />
                 {name.name}
               </label>
@@ -89,12 +147,14 @@ function AddPopupIntro({ submitForm, resetForm, closePopup }) {
           <label htmlFor="overview" className="form-control__label">
             Overview
           </label>
-          <input
+          <textarea
             id="overview"
-            type="text"
             name="overview"
-            placeholder="Enter Movie Url"
+            placeholder="Overview"
             className="form-control__input"
+            onChange={(e) => setOverview(e.target.value)}
+            value={overview}
+            required
           />
         </div>
         <div className="form-control">
@@ -107,21 +167,16 @@ function AddPopupIntro({ submitForm, resetForm, closePopup }) {
             name="runtime"
             placeholder="Runtime"
             className="form-control__input"
+            onChange={(e) => setRuntime(Number(e.target.value))}
+            value={runtime}
+            required
           />
         </div>
         <div className="d-flex justify-content-end">
-          <button
-            type="button"
-            className="bttn bttn--invert mr-2"
-            onClick={resetForm}
-          >
+          <button type="button" className="bttn bttn--invert mr-2" onClick={() => onReset()}>
             Reset
           </button>
-          <button
-            type="button"
-            className="bttn bttn--general"
-            onClick={submitForm}
-          >
+          <button type="submit" className="bttn bttn--general">
             Submit
           </button>
         </div>
@@ -130,10 +185,10 @@ function AddPopupIntro({ submitForm, resetForm, closePopup }) {
   );
 }
 
-export default AddPopupIntro;
+export default connect(null, { createFilm })(AddPopupIntro);
 
 AddPopupIntro.propTypes = {
-  closePopup: PropTypes.func.isRequired,
-  submitForm: PropTypes.func.isRequired,
-  resetForm: PropTypes.func.isRequired,
+  // closePopup: PropTypes.func.isRequired,
+  // submitForm: PropTypes.func.isRequired,
+  // resetForm: PropTypes.func.isRequired,
 };

@@ -12,6 +12,10 @@ const FilmDetails = ({ item }) => (
           src={item.poster_path}
           alt={item.title}
           className="film-figure__img"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/img/mock/image.jpg';
+          }}
         />
       </figure>
     </div>

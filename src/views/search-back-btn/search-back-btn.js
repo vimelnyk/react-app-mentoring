@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import './search-back-btn.scss';
+import { getItem } from '../../actions/filmActions';
 
-const SearchBackBtn = ({ label, changeCurrentItem }) => (
+const SearchBackBtn = ({ label, getItem }) => (
   <button
     type="button"
     className="search-back-button"
-    onClick={() => changeCurrentItem('')}
+    onClick={() => getItem('')}
     aria-label={label}
   />
 );
 SearchBackBtn.propTypes = {
   label: PropTypes.string.isRequired,
-  changeCurrentItem: PropTypes.func.isRequired,
 };
 
-export default SearchBackBtn;
+export default connect(null, { getItem })(SearchBackBtn);

@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getPopupCondition } from '../../actions/filmActions';
 
 import './popup.scss';
 
-const Popup = ({ closePopup, children }) => (
+const Popup = ({ getPopupCondition, children }) => (
   <>
     <div
-      onClick={() => closePopup()}
+      onClick={() => getPopupCondition('')}
       className="overlay"
       aria-hidden="true"
     />
     <div className="popup">
       <button
-        onClick={() => closePopup()}
+        onClick={() => getPopupCondition('')}
         aria-label="Close"
         className="popup__button"
         type="button"
@@ -24,9 +26,9 @@ const Popup = ({ closePopup, children }) => (
   </>
 );
 
-export default Popup;
+export default connect(null, { getPopupCondition })(Popup);
 
 Popup.propTypes = {
-  closePopup: PropTypes.func.isRequired,
+  getPopupCondition: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
