@@ -2,24 +2,20 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './edit-delete.scss';
-import { getPopupCondition } from '../../actions/filmActions';
+import { initPopupCondition, initManagedItem } from '../../actions/filmActions';
 
-function EditDelete({ getPopupCondition }) {
+function EditDelete({ id, initPopupCondition, initManagedItem }) {
   const [isOpen, setIsOpen] = useState(false);
-  const openDropdown = () => {
-    setIsOpen(true);
-  };
-  const closeDropdown = () => {
-    setIsOpen(false);
-  };
-
   return (
-    <div className="edit-delete" onMouseLeave={closeDropdown}>
+    <div className="edit-delete" onMouseLeave={() => setIsOpen(false)}>
       <button
         type="button"
         className="edit-delete__open"
         aria-label="Edit options"
-        onClick={openDropdown}
+        onClick={() => {
+          setIsOpen(true);
+          initManagedItem(id);
+        }}
       >
         <i className="edit-delete__icon" />
       </button>
@@ -27,21 +23,23 @@ function EditDelete({ getPopupCondition }) {
         <button
           type="button"
           className="edit-delete__close"
-          onClick={closeDropdown}
+          onClick={() => setIsOpen(false)}
         >
           <i className="edit-delete__close-icon" />
         </button>
         <button
           type="button"
           className="edit-delete__button"
-          onClick={() => getPopupCondition('editMovie')}
+          onClick={() => {
+            initPopupCondition('editMovie');
+          }}
         >
           Edit
         </button>
         <button
           type="button"
           className="edit-delete__button"
-          onClick={() => getPopupCondition('deleteMovie')}
+          onClick={() => initPopupCondition('deleteMovie')}
         >
           Delete
         </button>
@@ -50,8 +48,12 @@ function EditDelete({ getPopupCondition }) {
   );
 }
 
-export default connect(null, { getPopupCondition })(EditDelete);
+export default connect(null, { initPopupCondition, initManagedItem })(
+  EditDelete,
+);
 
 EditDelete.propTypes = {
-  getPopupCondition: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  initPopupCondition: PropTypes.func.isRequired,
+  initManagedItem: PropTypes.func.isRequired,
 };

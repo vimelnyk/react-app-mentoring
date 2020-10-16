@@ -4,7 +4,6 @@ import Header from './header';
 import Intro from './intro';
 import Footer from './footer';
 import Main from './main';
-import AddPopupIntro from './add-popup-intro';
 import EditPopupIntro from './edit-popup-intro';
 import DeletePopupIntro from './delete-popup-intro';
 
@@ -15,9 +14,6 @@ function App({ showPopup }) {
       <Intro />
       <Main />
       <Footer />
-      {showPopup === 'addMovie' && (
-      <AddPopupIntro />
-      )}
       {showPopup === 'editMovie' && (
       <EditPopupIntro />
       )}

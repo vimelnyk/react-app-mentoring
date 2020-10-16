@@ -48,7 +48,7 @@ FilmListItem.propTypes = {
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   getCurrentFilmItem: PropTypes.func.isRequired,
 };
 

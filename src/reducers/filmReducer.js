@@ -2,6 +2,7 @@ import {
   FETCH_FILMS,
   DELETE_FILM, NEW_FILM,
   CURRENT_ITEM,
+  MANAGED_ITEM,
   POPUP,
 } from '../actions/types';
 
@@ -9,6 +10,7 @@ const initialState = {
   items: [],
   item: {},
   currentItem: {},
+  managedItem: {},
   popup: '',
 };
 
@@ -45,6 +47,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         currentItem: getCurrentFilm(state.items, action.payload),
+      };
+    case MANAGED_ITEM:
+      return {
+        ...state,
+        managedItem: getCurrentFilm(state.items, action.payload),
       };
     case POPUP:
       return {
