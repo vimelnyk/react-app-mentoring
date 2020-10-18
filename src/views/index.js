@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from './header';
 import Intro from './intro';
 import Footer from './footer';
@@ -28,3 +29,6 @@ const mapStateToProps = (state) => ({
   showPopup: state.films.popup,
 });
 export default connect(mapStateToProps)(App);
+App.propTypes = {
+  showPopup: PropTypes.string.isRequired,
+};

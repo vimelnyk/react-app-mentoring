@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import useToggle from '../../utilities/useToggle';
@@ -7,11 +7,14 @@ import Popup from '../popup';
 import './edit-popup-intro.scss';
 import { createFilm, editFilm } from '../../actions/filmActions';
 
-function EditPopupIntro({ createFilm, editFilm, managedFilm }) {
+function EditPopupIntro({ createNewFilm, editThisFilm, managedFilm }) {
+  const forceUpdate = useReducer(() => ({}))[1];
   const [toggle, setToggle] = useToggle(false);
   const [title, setTitle] = useState(managedFilm.title || '');
   const [posterPath, setPosterPath] = useState(managedFilm.poster_path || '');
-  const [releaseDate, setReleaseDate] = useState(managedFilm.release_date || '');
+  const [releaseDate, setReleaseDate] = useState(
+    managedFilm.release_date || '',
+  );
   const [runtime, setRuntime] = useState(managedFilm.runtime || 0);
   const [genres, setGenres] = useState(managedFilm.genres || []);
   const [overview, setOverview] = useState(managedFilm.overview || '');
@@ -21,10 +24,12 @@ function EditPopupIntro({ createFilm, editFilm, managedFilm }) {
     const el = e.target.value;
     if (gr.includes(el)) {
       const needed = gr.filter((genre) => genre !== el);
-      return setGenres(needed);
+      setGenres(needed);
+    } else {
+      gr.push(el);
+      setGenres(gr);
     }
-    gr.push(el);
-    return setGenres(gr);
+    forceUpdate();
   };
 
   const onReset = () => {
@@ -49,11 +54,12 @@ function EditPopupIntro({ createFilm, editFilm, managedFilm }) {
     e.preventDefault();
     if (managedFilm.id) {
       const filmToEdit = {
-        ...film, id: managedFilm.id,
+        ...film,
+        id: managedFilm.id,
       };
-      editFilm(managedFilm.id, filmToEdit);
+      editThisFilm(managedFilm.id, filmToEdit);
     } else {
-      createFilm(film);
+      createNewFilm(film);
     }
   };
 
@@ -163,7 +169,7 @@ function EditPopupIntro({ createFilm, editFilm, managedFilm }) {
                   className="custom-select__input"
                   onChange={(e) => onCheckboxChange(e)}
                   value={name.name}
-
+                  checked={!!genres.includes(name.name)}
                 />
                 <i className="custom-select__icon" />
                 {name.name}
@@ -222,10 +228,14 @@ const mapStateToProps = (state) => ({
   managedFilm: state.films.managedItem,
 });
 
-export default connect(mapStateToProps, { createFilm, editFilm })(EditPopupIntro);
+export default connect(mapStateToProps, {
+  createNewFilm: createFilm,
+  editThisFilm: editFilm,
+})(EditPopupIntro);
 
 EditPopupIntro.propTypes = {
-  createFilm: PropTypes.func.isRequired,
+  createNewFilm: PropTypes.func.isRequired,
+  editThisFilm: PropTypes.func.isRequired,
   managedFilm: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,

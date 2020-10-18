@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 import { initPopupCondition } from '../../actions/filmActions';
 import './popup.scss';
 
-const Popup = ({ initPopupCondition, children }) => (
+const Popup = ({ doInitPopupCondition, children }) => (
   <>
     <div
-      onClick={() => initPopupCondition('')}
+      onClick={() => doInitPopupCondition('')}
       className="overlay"
       aria-hidden="true"
     />
     <div className="popup">
       <button
-        onClick={() => initPopupCondition('')}
+        onClick={() => doInitPopupCondition('')}
         aria-label="Close"
         className="popup__button"
         type="button"
@@ -25,9 +25,9 @@ const Popup = ({ initPopupCondition, children }) => (
   </>
 );
 
-export default connect(null, { initPopupCondition })(Popup);
+export default connect(null, { doInitPopupCondition: initPopupCondition })(Popup);
 
 Popup.propTypes = {
-  initPopupCondition: PropTypes.func.isRequired,
+  doInitPopupCondition: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };

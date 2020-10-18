@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './edit-delete.scss';
 import { initPopupCondition, initManagedItem } from '../../actions/filmActions';
 
-function EditDelete({ id, initPopupCondition, initManagedItem }) {
+function EditDelete({ id, doInitPopupCondition, doInitManagedItem }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="edit-delete" onMouseLeave={() => setIsOpen(false)}>
@@ -14,7 +14,7 @@ function EditDelete({ id, initPopupCondition, initManagedItem }) {
         aria-label="Edit options"
         onClick={() => {
           setIsOpen(true);
-          initManagedItem(id);
+          doInitManagedItem(id);
         }}
       >
         <i className="edit-delete__icon" />
@@ -31,7 +31,7 @@ function EditDelete({ id, initPopupCondition, initManagedItem }) {
           type="button"
           className="edit-delete__button"
           onClick={() => {
-            initPopupCondition('editMovie');
+            doInitPopupCondition('editMovie');
           }}
         >
           Edit
@@ -39,7 +39,7 @@ function EditDelete({ id, initPopupCondition, initManagedItem }) {
         <button
           type="button"
           className="edit-delete__button"
-          onClick={() => initPopupCondition('deleteMovie')}
+          onClick={() => doInitPopupCondition('deleteMovie')}
         >
           Delete
         </button>
@@ -48,12 +48,13 @@ function EditDelete({ id, initPopupCondition, initManagedItem }) {
   );
 }
 
-export default connect(null, { initPopupCondition, initManagedItem })(
-  EditDelete,
-);
+export default connect(null, {
+  doInitPopupCondition: initPopupCondition,
+  doInitManagedItem: initManagedItem,
+})(EditDelete);
 
 EditDelete.propTypes = {
   id: PropTypes.number.isRequired,
-  initPopupCondition: PropTypes.func.isRequired,
-  initManagedItem: PropTypes.func.isRequired,
+  doInitPopupCondition: PropTypes.func.isRequired,
+  doInitManagedItem: PropTypes.func.isRequired,
 };

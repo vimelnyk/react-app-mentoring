@@ -1,9 +1,14 @@
+/* eslint-disable func-names */
 import {
   FETCH_FILMS,
-  DELETE_FILM, NEW_FILM,
+  DELETE_FILM,
   CURRENT_ITEM,
   MANAGED_ITEM,
   POPUP,
+  SORT_BY,
+  SORT_ORDER,
+  GENRES_FILTER,
+  FILMS_NUMBER,
 } from '../actions/types';
 
 const initialState = {
@@ -12,6 +17,10 @@ const initialState = {
   currentItem: {},
   managedItem: {},
   popup: '',
+  sortBy: '',
+  sortOrder: null,
+  genresFilter: '',
+  filmsNumber: 0,
 };
 
 const getCurrentFilm = (state, id) => {
@@ -22,23 +31,16 @@ const getCurrentFilm = (state, id) => {
   return arr[0];
 };
 
-const fixBackend = (state) => state.reverse().slice(0, 10);
+const fixBackend = (state) => state.reverse().slice(0, 39);
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_FILMS:
-      console.log(action.payload);
       return {
         ...state,
         items: fixBackend(action.payload),
       };
-    case NEW_FILM:
-      return {
-        ...state,
-        item: action.payload,
-      };
     case DELETE_FILM:
-      console.log(action.payload);
       return {
         ...state,
         items: action.payload,
@@ -57,6 +59,26 @@ export default function (state = initialState, action) {
       return {
         ...state,
         popup: action.payload,
+      };
+    case SORT_BY:
+      return {
+        ...state,
+        sortBy: action.payload,
+      };
+    case SORT_ORDER:
+      return {
+        ...state,
+        sortOrder: action.payload,
+      };
+    case GENRES_FILTER:
+      return {
+        ...state,
+        genresFilter: action.payload,
+      };
+    case FILMS_NUMBER:
+      return {
+        ...state,
+        filmsNumber: action.payload.length,
       };
     default:
       return state;

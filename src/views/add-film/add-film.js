@@ -4,13 +4,13 @@ import './add-film.scss';
 import { connect } from 'react-redux';
 import { initPopupCondition, initManagedItem } from '../../actions/filmActions';
 
-const AddFilm = ({ label, initPopupCondition, initManagedItem }) => (
+const AddFilm = ({ label, doInitPopupCondition, doInitManagedItem }) => (
   <button
     type="button"
     className="add-film-button"
     onClick={() => {
-      initPopupCondition('editMovie');
-      initManagedItem('');
+      doInitPopupCondition('editMovie');
+      doInitManagedItem('');
     }}
   >
     +
@@ -19,8 +19,11 @@ const AddFilm = ({ label, initPopupCondition, initManagedItem }) => (
 );
 AddFilm.propTypes = {
   label: PropTypes.string.isRequired,
-  initPopupCondition: PropTypes.func.isRequired,
-  initManagedItem: PropTypes.func.isRequired,
+  doInitPopupCondition: PropTypes.func.isRequired,
+  doInitManagedItem: PropTypes.func.isRequired,
 };
 
-export default connect(null, { initPopupCondition, initManagedItem })(AddFilm);
+export default connect(null, {
+  doInitPopupCondition: initPopupCondition,
+  doInitManagedItem: initManagedItem,
+})(AddFilm);
