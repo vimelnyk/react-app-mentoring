@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useRouteMatch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import FilmListItem from '../film-list-item';
+import NothingFound from '../nothing-found';
 import convertYearView from '../../utilities/convertYearView';
+import fixBackend from '../../utilities/fixBackend';
+import convertSortType from '../../utilities/convertSortType';
 import './film-list.scss';
 import { fetchFilms, getFilmsNumber } from '../../actions/filmActions';
 
@@ -16,13 +20,9 @@ function FilmList({
   useEffect(() => {
     fetchFilmList();
   }, []);
-
-  const convertSortType = (sortBy, filmItem) => {
-    if (sortBy === 'release_date') {
-      return Date.parse(filmItem);
-    }
-    return filmItem;
-  };
+  const matchSearchSlug = useRouteMatch('/search/:slug');
+  const matchSearch = useRouteMatch('/search');
+  const matchFilmSlug = useRouteMatch('/film/:slug');
 
   const sortFilms = (filmsArr, sortBy, sortOrder) => {
     if (sortOrder) {
@@ -46,19 +46,46 @@ function FilmList({
     return result;
   };
 
-  const getFilmsView = (filmsArr, sortBy, sortOrder, filterBy) => {
-    const filteredFilms = filterFilms(filmsArr, filterBy);
-    const sortedFilms = sortFilms(filteredFilms, sortBy, sortOrder);
-    getFilmListLength(sortedFilms);
-    return sortedFilms;
+  const checkSearchExpression = () => {
+    if (!matchSearchSlug) {
+      if (matchSearch || matchFilmSlug) {
+        return null;
+      }
+    }
+    if (matchSearchSlug) {
+      return matchSearchSlug.params.slug;
+    }
+    return '';
   };
 
-  const filmsToShow = getFilmsView(films, sortOption, true, filterOption);
+  const searchFilms = (filmsArr, searchBy) => {
+    if (searchBy === '') {
+      return [];
+    }
+    if (searchBy === null) {
+      return filmsArr;
+    }
+    const result = filmsArr.filter((film) => film.title.toLowerCase().includes(searchBy.toLowerCase()));
+    return result;
+  };
 
+  const getFilmsView = (filmsArr, sortBy, sortOrder, filterBy, searchBy) => {
+    const filteredFilms = filterFilms(filmsArr, filterBy);
+    const sortedFilms = sortFilms(filteredFilms, sortBy, sortOrder);
+    const searchedFilms = searchFilms(sortedFilms, searchBy);
+    getFilmListLength(searchedFilms);
+    return searchedFilms;
+  };
+
+  const filmsToShow = fixBackend(getFilmsView(
+    films,
+    sortOption,
+    true,
+    filterOption,
+    checkSearchExpression(),
+  ));
   if (filmsToShow && filmsToShow.length === 0) {
-    return (
-      <div className="d-flex justify-content-center col">Nothing was found</div>
-    );
+    return <NothingFound />;
   }
   return (
     <ul className="film-list">

@@ -1,52 +1,76 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import {
+
+  useParams,
+
+} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchSingleFilm } from '../../actions/filmActions';
 import convertYearView from '../../utilities/convertYearView';
 
 import './film-details.scss';
 
-const FilmDetails = ({ item }) => (
-  <div className="row">
-    <div className="col col-xl-3">
-      <figure className="film-figure">
-        <img
-          src={item.poster_path}
-          alt={item.title}
-          className="film-figure__img"
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = '/img/mock/image.jpg';
-          }}
-        />
-      </figure>
-    </div>
-    <div className="col col-xl-9">
-      <div className="film-details">
-        <div className="film-details__head mb-2">
-          <h1 className="film-details__title mr-3">{item.title}</h1>
-          <i className="film-details__rating">{item.vote_average}</i>
-        </div>
-        <h2 className="film-details__subtitle mb-3">{item.tagline}</h2>
-        <div className="film-details__params params mb-3">
-          <span className="params__item mr-4">
-            {convertYearView(item.release_date)}
-          </span>
-          <span className="params__item">
-            {item.runtime}
-            {' '}
-            min
-          </span>
-        </div>
-        <div className="film-details__body" />
-        {item.overview}
-      </div>
-    </div>
-  </div>
-);
+function FilmDetails({ fetchFilm, filmItem }) {
+  const { id } = useParams();
+  useEffect(() => {
+    if (Number(id) !== filmItem.id) {
+      fetchFilm(Number(id));
+    }
+  }, [id, filmItem]);
 
-export default FilmDetails;
+  return (
+    <section className="intro intro--darken d-flex align-items-center">
+      <div className="container">
+        <div className="row">
+          <div className="col col-xl-3">
+            <figure className="film-figure">
+              <img
+                src={filmItem.poster_path}
+                alt={filmItem.title}
+                className="film-figure__img"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/public/img/mock/image.jpg';
+                }}
+              />
+            </figure>
+          </div>
+          <div className="col col-xl-9">
+            <div className="film-details">
+              <div className="film-details__head mb-2">
+                <h1 className="film-details__title mr-3">{filmItem.title}</h1>
+                <i className="film-details__rating">{filmItem.vote_average}</i>
+              </div>
+              <h2 className="film-details__subtitle mb-3">
+                {filmItem.tagline}
+              </h2>
+              <div className="film-details__params params mb-3">
+                <span className="params__item mr-4">
+                  {convertYearView(filmItem.release_date)}
+                </span>
+                <span className="params__item">
+                  {filmItem.runtime}
+                  {' '}
+                  min
+                </span>
+              </div>
+              <div className="film-details__body" />
+              {filmItem.overview}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+const mapStateToProps = (state) => ({
+  filmItem: state.films.singleFilm,
+});
+export default connect(mapStateToProps, { fetchFilm: fetchSingleFilm })(FilmDetails);
 
 FilmDetails.defaultProps = {
-  item: {
+  filmItem: {
     id: 1,
     title: 'Film1',
     tagline: 'Film1 description',
@@ -60,7 +84,7 @@ FilmDetails.defaultProps = {
 };
 
 FilmDetails.propTypes = {
-  item: PropTypes.shape({
+  filmItem: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     tagline: PropTypes.string,
@@ -70,4 +94,5 @@ FilmDetails.propTypes = {
     runtime: PropTypes.number.isRequired,
     overview: PropTypes.string.isRequired,
   }),
+  fetchFilm: PropTypes.func.isRequired,
 };

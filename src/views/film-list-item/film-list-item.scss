@@ -7,6 +7,12 @@
         width: 100%;
         min-width: 100%;
     }
+    &__caption {
+      color: $white;
+    }
+    a{
+      text-decoration: none !important;
+    }
 }
 
 .caption {
