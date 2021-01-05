@@ -2,4 +2,9 @@
 .main {
     flex: 1;
     background-color: $dark;
+    display: flex;
+    flex-direction: column;
+}
+.film-list-container{
+  flex:1;
 }

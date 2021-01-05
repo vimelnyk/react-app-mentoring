@@ -1,20 +1,30 @@
 import React from 'react';
+import {
+  Switch, Route, Redirect,
+} from 'react-router-dom';
 import Search from '../search';
+import FilmDetails from '../film-details';
 import './intro.scss';
 
 const Intro = () => (
-  <section className="intro d-flex align-items-center">
+  <Switch>
+    <Route path="/(|search)/">
+      <Search
+        label="Find Your Movie"
+        placeholder="What do you want to watch?"
+        buttonLabel="Search"
+      />
+    </Route>
 
-    <div className="container">
-      <div className="row justify-content-center">
-        <Search
-          label="Find Your Movie"
-          placeholder="What do you want to watch?"
-          buttonLabel="Search"
-        />
-      </div>
-    </div>
-  </section>
+    <Route path="/film/:id">
+      <FilmDetails />
+    </Route>
+    <Route exact path="/film">
+      <Redirect to="/page-not-found" />
+    </Route>
+
+    <Route path="*" />
+  </Switch>
 );
 
 export default Intro;

@@ -1,41 +1,33 @@
 @import '../../styles/global.scss';
 
 .edit-delete {
-  position: absolute;
-  top:0;
-  right:0;
+  @include posAbs(0, 15px, auto, auto);
+  z-index: 1;
   display: none;
   &__open{
+    @include square(32px);
     position: relative;
     top:5px;
     right:5px;
     appearance: none;
     display: inline-block;
-    width:32px;
-    height:32px;
     border:0;
     border-radius:100%;
     background-color: $base;
     cursor: pointer;
   }
   &__icon{
-    position: absolute;
-    top:50%;
-    left:50%;
+    @include posAbs(50%, auto, auto, 50%);
     transform:translate(-50%, -50%);
     display: inline-block;
-    width:4px;
-    height:4px;
+    @include square(4px);
     background-color: $white;
     border-radius:100%;
     &::after, &::before {
-      position: absolute;
-      top: -7px;
-      left:0;
+      @include posAbs(-7px, auto, auto, 0);
+      @include square(4px);
       content:'';
       display: inline-block;
-      width:4px;
-      height:4px;
       background-color: $white;
       border-radius:100%;
     }
@@ -44,9 +36,7 @@
     }
   }
   &__dropdown{
-    position: absolute;
-    top:0;
-    right:0;
+    @include posAbs(0, 0, auto, auto);
     width:120px;
     padding-top: 24px;
     padding-bottom: 10px;
@@ -68,32 +58,23 @@
     cursor: pointer;
   }
   &__close{
-      position: absolute;
-      top:5px;
-      right:5px;
-      width:16px;
-      height:16px;
+    @include posAbs(5px, 5px, auto, auto);
+      @include square(16px);
       appearance: none;
       background-color: transparent;
       border:none;
       cursor: pointer;
       i {
-        position: absolute;
-        top: 0;
-        left: 0;
+        @include posAbs(0, auto, auto, 0);
         display: inline-block;
         transform: rotate(45deg);
-        width: 16px;
-        height: 16px;
-
+        @include square(16px);
         &::before,
         &::after {
-          position: absolute;
+          @include posAbs(50%, auto, auto, 50%);
           display: inline-block;
           content: '';
           background-color: $white;
-          top: 50%;
-          left: 50%;
           transform: translate(-50%, -50%);
         }
 

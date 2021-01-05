@@ -13,14 +13,11 @@
     display: inline-block;
     position: relative;
     &::after{
-      position: absolute;
-      top:22px;
-      right:2px;
+      @include posAbs(22px, 2px, auto, auto);
+      @include square(0);
       display: inline-block;
       margin-top: -10px;
       content:'';
-      width:0;
-      height: 0;
       border: 5px solid transparent;
       border-top: 5px solid $main;
     }
@@ -34,9 +31,8 @@
     border:0;
     background-color: $dark;
     cursor: pointer;
-    font-size:0.8rem;
+    font-size: 0.8rem;
     appearance: none;
     padding-right: 20px;
-
   }
 }

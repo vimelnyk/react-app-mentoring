@@ -1,0 +1,32 @@
+@import '../../styles/global.scss';
+
+.search-back-button {
+  position: relative;
+    appearance: none;
+    color: $main;
+    background-color: transparent;
+    border: 0;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor:pointer;
+    &::before{
+      content: '';
+      display: inline-block;
+      @include square(20px);
+      border:2px solid $main;
+      border-radius: 100%;
+    }
+    &::after {
+      position: absolute;
+      top:calc(100% - 12.5px);
+      left:calc(100% - 12.5px);
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height:2px;
+      background-color: $main;
+      transform:rotate(45deg);
+      transform-origin:center;
+    }
+
+}
