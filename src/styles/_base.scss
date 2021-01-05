@@ -29,3 +29,25 @@ body {
   text-transform: uppercase;
   font-size: 1.5rem;
 }
+
+.intro {
+  padding-top: 100px;
+  padding-bottom: 100px;
+    position: relative;
+    min-height: 300px;
+    overflow: hidden;
+    &::before {
+      @include posAbs;
+      content:"";
+      background: url("/public/img/background.jpg") no-repeat center;
+      background-size: cover;
+      filter: blur(8px);
+      z-index: 0;
+      opacity: 0.5;
+    }
+    &--darken{
+      &::before {
+      opacity: 0.15;
+      }
+    }
+}

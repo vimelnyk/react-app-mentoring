@@ -1,20 +1,5 @@
 @import '../../styles/global.scss';
 
-.intro {
-    position: relative;
-    min-height: 300px;
-    overflow: hidden;
-    &::before {
-      @include posAbs;
-      content:"";
-      background: url('../../img/background.jpg') no-repeat center;
-      background-size: cover;
-      filter: blur(8px);
-      z-index: 0;
-      opacity: 0.5;
-    }
-}
-
 
 
 .film-figure {

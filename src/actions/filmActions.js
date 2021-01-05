@@ -1,13 +1,13 @@
 /* eslint-disable no-alert */
 import {
   FETCH_FILMS,
-  CURRENT_ITEM,
   POPUP,
   MANAGED_ITEM,
   SORT_BY,
   SORT_ORDER,
   GENRES_FILTER,
   FILMS_NUMBER,
+  FETCH_SINGLE_FILM,
 } from './types';
 
 const apiUrl = 'http://localhost:4000/movies';
@@ -19,6 +19,24 @@ export const fetchFilms = () => (dispatch) => {
       type: FETCH_FILMS,
       payload: films.data,
     }));
+};
+
+export const fetchSingleFilm = (id) => (dispatch) => {
+  fetch(`${apiUrl}/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  })
+    .then((res) => res.json())
+    .then((film) => dispatch({
+      type: FETCH_SINGLE_FILM,
+      payload: film,
+    }))
+    .catch(() => {
+      window.location.href = `${window.location.protocol}//${window.location.host}/page-not-found`;
+    });
 };
 
 export const initPopupCondition = (condition) => ({
@@ -82,11 +100,6 @@ export const editFilm = (filmId, filmData) => (dispatch) => {
     .then(() => dispatch(initPopupCondition('')))
     .catch((err) => alert(err));
 };
-
-export const getItem = (id) => ({
-  type: CURRENT_ITEM,
-  payload: id,
-});
 
 export const initManagedItem = (id) => ({
   type: MANAGED_ITEM,
