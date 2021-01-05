@@ -1,11 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
-  entry: './src/app.js',
+  mode: "development",
+  entry: "./src/app.js",
   output: {
-    path: path.join(__dirname, 'public'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "public"),
+    filename: "bundle.js",
+    publicPath: "/",
   },
   optimization: {
     minimize: false,
@@ -14,46 +15,45 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        enforce: 'pre',
-        loader: 'eslint-loader',
+        enforce: "pre",
+        loader: "eslint-loader",
         exclude: /node_modules/,
         options: {
           emitWarning: true,
-          configFile: './.eslintrc',
+          configFile: "./.eslintrc",
           fix: true,
         },
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         options: {
-          presets: [
-            '@babel/preset-env',
-            '@babel/react',
-          ],
+          presets: ["@babel/preset-env", "@babel/react"],
         },
       },
       {
         test: /\.(sa|sc|c)ss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
           },
         ],
       },
       {
         test: /\.js$/,
-        enforce: 'pre',
-        use: ['source-map-loader'],
+        enforce: "pre",
+        use: ["source-map-loader"],
       },
-    ]
+    ],
   },
   devServer: {
-    contentBase: path.join(__dirname, 'public'),
+    historyApiFallback: {
+      index: "public/index.html",
+    },
   },
 };

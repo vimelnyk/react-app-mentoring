@@ -1,0 +1,152 @@
+.bttn{
+   cursor: pointer;
+   appearance: none;
+   display: inline-block;
+   min-width: 100px;
+   padding:1rem;
+   text-transform: uppercase;
+   border: 2px solid;
+   border-radius:4px;
+   &--invert {
+    @include colored_button($main, transparent, $main, $white, $main, $main);
+   }
+   &--general {
+    @include colored_button($white, $main, $main, $main, transparent, $main);
+   }
+}
+
+%appearance{
+      background-color: $base-1;
+      max-height: 36px;
+      appearance: none;
+      display: block;
+      width:100%;
+      color:$white;
+      border-radius: 4px;
+      border:none;
+      padding:10px;
+      &::placeholder {
+        color: $white;
+        opacity: 1
+      }
+  }
+
+.form-control {
+  margin-bottom: 20px;
+  &__label {
+    display: block;
+    text-transform: uppercase;
+    color:$main;
+    margin-bottom: 10px;
+  }
+  &__input{
+    @extend %appearance;
+    &--number{
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+         -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.form-error {
+  font-size: 0.8rem;
+  color:$main;
+}
+
+.custom-select {
+  position: relative;
+  appearance: none;
+  padding:0;
+  border:0;
+  &__button{
+    @extend %appearance;
+    cursor: pointer;
+    padding-right: 30px;
+    text-align: left;
+    position: relative;
+    &::after{
+      @include posAbs(18px, 5px, auto, auto);
+      @include square(0);
+      content:'';
+      border:5px solid transparent;
+      border-top:5px solid $main;
+    }
+  }
+  &__dropdown{
+    @include posAbs(100%, 0, auto, 0);
+    background-color:$dark;
+    padding:10px;
+    display: none;
+    &.active{
+      display: block;
+    }
+  }
+  &__checkbox{
+    position: relative;
+    padding:5px 5px 5px 30px;
+    display: block;
+    cursor: pointer;
+  }
+  &__icon {
+    @include posAbs(calc(50% - 8px), auto, auto, 0);
+    @include transitions;
+    @include square(16px);
+    border-radius:4px;
+    background-color: $white;
+    &::after{
+      @include posAbs(4px, auto, auto, 3px);
+      content:'';
+      display: inline-block;
+      width:10px;
+      height:5px;
+      border-bottom:2px solid $white;
+      border-left:2px solid $white;
+      transform: rotate(-45deg);
+      opacity:0;
+    }
+  }
+  &__input{
+    @include square(1px);
+    position: absolute;
+    opacity: 1;
+    &:checked{
+      +.custom-select__icon {
+        background-color: $main;
+        &::after{
+           opacity:1;
+        }
+      }
+    }
+  }
+}
+
+.custom-date{
+  position: relative;
+  background-color: $base-1;
+  border-radius: 4px;
+  svg{
+    @include posAbs(50%, 5px, auto, auto);
+    @include square(16px);
+    transform:translateY(-50%);
+    z-index: 0;
+  }
+  &__input{
+    position: relative;
+    z-index: 1;
+      appearance: none;
+      display: block;
+      width:100%;
+      color:$white;
+      border-radius: 4px;
+      border:none;
+      padding:10px;
+      background-color: transparent;
+      &::-webkit-inner-spin-button,
+     &::-webkit-calendar-picker-indicator {opacity: 0;
+      cursor: pointer;
+    appearance:none;}
+  }
+}

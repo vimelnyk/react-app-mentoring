@@ -1,0 +1,37 @@
+@mixin transitions($transition_property: all, $transition_duration: 0.2s, $transition_timing: ease-in, $transition_delay: 0s) {
+  transition: $transition_property $transition_duration $transition_timing $transition_delay;
+}
+
+@mixin colored_button($color, $background, $border, $color_hover, $background_hover, $border_hover) {
+  @include transitions(all, 0.3s, ease, 0s);
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+
+  &:visited {
+    color: $color;
+    background-color: $background;
+    border-color: $border;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $color_hover;
+    background-color: $background_hover;
+    border-color: $border_hover;
+  }
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin posAbs($top: 0, $right:0, $bottom:0, $left:0) {
+  position: absolute;
+  top:$top;
+  right:$right;
+  bottom:$bottom;
+  left:$left;
+}
