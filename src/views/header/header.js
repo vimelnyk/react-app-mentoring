@@ -1,23 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {
+  Switch, Route,
+} from 'react-router-dom';
 import AddFilm from '../add-film';
 import SearchBackBtn from '../search-back-btn';
 import Logo from '../logo';
 import './header.scss';
 
-const Header = ({ openPopup, currentItem, changeCurrentItem }) => (
+const Header = () => (
   <header className="header">
     <div className="container">
       <div className="row ">
         <div className="col d-flex  justify-content-between align-items-center">
           <Logo />
-          {!currentItem && <AddFilm label="Add Movie" openPopup={openPopup} />}
-          {currentItem !== '' && (
-            <SearchBackBtn
-              label="Find Your Movie"
-              changeCurrentItem={changeCurrentItem}
-            />
-          )}
+          <Switch>
+            <Route path="/(|search)">
+              <AddFilm label="Add Movie" />
+            </Route>
+            <Route path="/film/:id">
+              <SearchBackBtn label="Find Your Movie" />
+            </Route>
+          </Switch>
         </div>
       </div>
     </div>
@@ -25,8 +28,3 @@ const Header = ({ openPopup, currentItem, changeCurrentItem }) => (
 );
 
 export default Header;
-Header.propTypes = {
-  openPopup: PropTypes.func.isRequired,
-  currentItem: PropTypes.string.isRequired,
-  changeCurrentItem: PropTypes.func.isRequired,
-};

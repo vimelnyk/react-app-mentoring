@@ -13,7 +13,7 @@
     color:$white;
     font-size:0.8rem;
 
-    &:hover, &:active {
+    &:hover, &:active, &.active {
       &::after{
         @include posAbs(auto, 0, -2px, 0);
         content:'';

@@ -1,96 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import {
+  BrowserRouter as Router, Switch, Route,
+} from 'react-router-dom';
 import Header from './header';
 import Intro from './intro';
 import Footer from './footer';
 import Main from './main';
-import AddPopupIntro from './add-popup-intro';
+import Page404 from './page-404';
 import EditPopupIntro from './edit-popup-intro';
 import DeletePopupIntro from './delete-popup-intro';
 
-function App() {
-  const [items, setItems] = useState([]);
-  const [showPopup, setShowPopup] = useState('');
-  const [currentItem, setCurrentItem] = useState('');
-  const [currentItemFull, setCurrentItemFull] = useState({});
-
-  const getCurrentFilm = (id) => {
-    const arr = items.filter((item) => item.id === id);
-    return arr[0];
-  };
-
-  async function fetchData() {
-    const res = await fetch('http://localhost:4000/movies');
-    res
-      .json()
-      .then((result) => setItems(result.data))
-      .catch((err) => {
-        console.log(err);
-        setItems([]);
-      });
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const openPopup = (value) => {
-    setShowPopup(value);
-  };
-
-  const closePopup = () => {
-    setShowPopup('');
-  };
-
-  const resetForm = () => {
-    closePopup();
-  };
-
-  const submitForm = () => {
-    closePopup();
-  };
-
-  const changeCurrentItem = (id) => {
-    setCurrentItem(id);
-    setCurrentItemFull(getCurrentFilm(id));
-  };
-
+function App({ showPopup }) {
   return (
-    <>
-      <Header
-        openPopup={openPopup}
-        changeCurrentItem={changeCurrentItem}
-        currentItem={currentItem}
-      />
-      <Intro
-        currentItem={currentItem}
-        currentItemFull={currentItemFull}
-      />
-      <Main
-        openPopup={openPopup}
-        items={items}
-        openDeletePopup={openPopup}
-        changeCurrentItem={changeCurrentItem}
-      />
-      <Footer />
-      {showPopup === 'addMovie' && (
-        <AddPopupIntro
-          closePopup={closePopup}
-          resetForm={resetForm}
-          submitForm={submitForm}
-        />
-      )}
-      {showPopup === 'editMovie' && (
-        <EditPopupIntro
-          closePopup={closePopup}
-          resetForm={resetForm}
-          submitForm={submitForm}
-        />
-      )}
-      {showPopup === 'deleteMovie' && (
-        <DeletePopupIntro closePopup={closePopup} />
-      )}
-    </>
+    <Router>
+      <Switch>
+        <Route path="/(|search|film)/">
+          <Header />
+          <Intro />
+          <Main />
+          <Footer />
+          {showPopup === 'editMovie' && <EditPopupIntro />}
+          {showPopup === 'deleteMovie' && <DeletePopupIntro />}
+        </Route>
+        <Route path="*">
+          <Header />
+          <Page404 />
+          <Footer />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  showPopup: state.films.popup,
+});
+export default connect(mapStateToProps)(App);
+App.propTypes = {
+  showPopup: PropTypes.string.isRequired,
+};

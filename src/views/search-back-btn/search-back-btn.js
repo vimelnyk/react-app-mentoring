@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  Link,
+
+} from 'react-router-dom';
 import './search-back-btn.scss';
 
-const SearchBackBtn = ({ label, changeCurrentItem }) => (
-  <button
-    type="button"
-    className="search-back-button"
-    onClick={() => changeCurrentItem('')}
-    aria-label={label}
-  />
+const SearchBackBtn = ({ label }) => (
+  <div>
+    <Link className="search-back-button" to="/" title={label} />
+  </div>
 );
 SearchBackBtn.propTypes = {
   label: PropTypes.string.isRequired,
-  changeCurrentItem: PropTypes.func.isRequired,
 };
 
 export default SearchBackBtn;

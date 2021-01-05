@@ -1,7 +1,8 @@
 @import '../../styles/global.scss';
 
 .edit-delete {
-  @include posAbs(0, 0, auto, auto);
+  @include posAbs(0, 15px, auto, auto);
+  z-index: 1;
   display: none;
   &__open{
     @include square(32px);

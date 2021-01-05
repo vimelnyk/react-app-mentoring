@@ -1,20 +1,5 @@
 @import '../../styles/global.scss';
 
-.intro {
-    position: relative;
-    min-height: 300px;
-    overflow: hidden;
-    &::before {
-      @include posAbs;
-      content:"";
-      background: url('../../img/background.jpg') no-repeat center;
-      background-size: cover;
-      filter: blur(8px);
-      z-index: 0;
-      opacity: 0.5;
-    }
-}
-
 
 
 .film-figure {
@@ -37,11 +22,11 @@
     display: inline-block;
   }
   &__rating{
+    @include square(46px);
+    display: inline-flex;
     border: 1px solid $white;
     color: green;
     border-radius: 100%;
-    display: inline-flex;
-    @include square(46px);
     font-size: 1.2rem;
     font-style: normal;
     align-items: center;

@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import './edit-delete.scss';
+import { initPopupCondition, initManagedItem } from '../../actions/filmActions';
 
-function EditDelete({ openPopup, openDeletePopup }) {
+function EditDelete({ id, doInitPopupCondition, doInitManagedItem }) {
   const [isOpen, setIsOpen] = useState(false);
-  const openDropdown = () => {
-    setIsOpen(true);
-  };
-  const closeDropdown = () => {
-    setIsOpen(false);
-  };
-
   return (
-    <div className="edit-delete" onMouseLeave={closeDropdown}>
+    <div className="edit-delete" onMouseLeave={() => setIsOpen(false)}>
       <button
         type="button"
         className="edit-delete__open"
         aria-label="Edit options"
-        onClick={openDropdown}
+        onClick={() => {
+          setIsOpen(true);
+          doInitManagedItem(id);
+        }}
       >
         <i className="edit-delete__icon" />
       </button>
@@ -25,21 +23,23 @@ function EditDelete({ openPopup, openDeletePopup }) {
         <button
           type="button"
           className="edit-delete__close"
-          onClick={closeDropdown}
+          onClick={() => setIsOpen(false)}
         >
           <i className="edit-delete__close-icon" />
         </button>
         <button
           type="button"
           className="edit-delete__button"
-          onClick={() => openPopup('editMovie')}
+          onClick={() => {
+            doInitPopupCondition('editMovie');
+          }}
         >
           Edit
         </button>
         <button
           type="button"
           className="edit-delete__button"
-          onClick={() => openDeletePopup('deleteMovie')}
+          onClick={() => doInitPopupCondition('deleteMovie')}
         >
           Delete
         </button>
@@ -48,8 +48,13 @@ function EditDelete({ openPopup, openDeletePopup }) {
   );
 }
 
-export default EditDelete;
+export default connect(null, {
+  doInitPopupCondition: initPopupCondition,
+  doInitManagedItem: initManagedItem,
+})(EditDelete);
+
 EditDelete.propTypes = {
-  openPopup: PropTypes.func.isRequired,
-  openDeletePopup: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  doInitPopupCondition: PropTypes.func.isRequired,
+  doInitManagedItem: PropTypes.func.isRequired,
 };
