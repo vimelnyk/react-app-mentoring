@@ -13,7 +13,6 @@
    &--general {
     @include colored_button($white, $main, $main, $main, transparent, $main);
    }
-
 }
 
 %appearance{
@@ -26,7 +25,12 @@
       border-radius: 4px;
       border:none;
       padding:10px;
-}
+      &::placeholder {
+        color: $white;
+        opacity: 1
+      }
+  }
+
 .form-control {
   margin-bottom: 20px;
   &__label {
@@ -37,7 +41,19 @@
   }
   &__input{
     @extend %appearance;
+    &--number{
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+         -webkit-appearance: none;
+        margin: 0;
+      }
+    }
   }
+}
+
+.form-error {
+  font-size: 0.8rem;
+  color:$main;
 }
 
 .custom-select {
@@ -133,5 +149,4 @@
       cursor: pointer;
     appearance:none;}
   }
-
 }

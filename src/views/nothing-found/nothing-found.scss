@@ -1,0 +1,12 @@
+@import '../../styles/global.scss';
+.nothing-found{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex:1;
+  min-height: 50vh;
+  &__title{
+    font-weight: 400;
+    font-size: 2rem;
+  }
+}

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './toolkit-result.scss';
 
 const ToolkitResult = ({ filmsNumber }) => (
-  <span className="toolkit-result">
+  <span className={`toolkit-result ${filmsNumber === 0 && 'd-none'}`}>
     <b>
       {filmsNumber}
       {' '}
