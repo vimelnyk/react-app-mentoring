@@ -1,0 +1,9 @@
+@import '../../styles/global.scss';
+
+.header{
+  @include posAbs(0, 0, auto, 0);
+  min-height: 60px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}

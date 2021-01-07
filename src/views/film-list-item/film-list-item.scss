@@ -1,0 +1,38 @@
+@import '../../styles/global.scss';
+
+.film-item {
+    position: relative;
+    cursor: pointer;
+    &__image {
+        width: 100%;
+        min-width: 100%;
+    }
+    &__caption {
+      color: $white;
+    }
+    a{
+      text-decoration: none !important;
+    }
+}
+
+.caption {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  &__head{
+    padding-bottom: 0.5rem;
+  }
+  &__title {
+    font-size:1rem;
+    font-weight: normal;
+  }
+  &__date {
+    border: 1px solid $white;
+    padding:  3px 10px;
+    font-size: 0.7rem;
+    border-radius:4px;
+  }
+  &__subtitle {
+    font-weight: normal;
+    font-size: 0.8rem;
+  }
+}

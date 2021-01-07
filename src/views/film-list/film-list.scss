@@ -1,0 +1,15 @@
+.film-list{
+    display: flex;
+    flex-wrap: wrap;
+    list-style:none;
+    padding-left: 0;
+    width: 100%;
+    &__item{
+      position: relative;
+        &:hover {
+          .edit-delete {
+            display: block
+          }
+        }
+    }
+}

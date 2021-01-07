@@ -1,0 +1,12 @@
+@import '../../styles/global.scss';
+
+.add-film-button {
+    appearance: none;
+    color: $main;
+    text-transform: uppercase;
+    background-color: rgba($base, 0.5);
+    border: 0;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}

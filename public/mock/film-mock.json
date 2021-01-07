@@ -1,0 +1,42 @@
+{"data":[
+  {
+    "title": "Film1",
+    "description": "Film1 description",
+    "url": "../../img/mock/1.jpg",
+    "year": "2020",
+    "rating": "4.9",
+    "duration": "151",
+    "overview": "We all have a superhero inside us, it just takes a bit of magic to bring it out. In Billy Batson's case, by shouting out one word--SHAZAM!--this streetwise 14-year-old foster kid can turn into the adult superhero Shazam, courtesy of an ancient wizard.Still a kid at heart--inside a ripped, godlike body--Shazam revels in this adult version of himself by doing what any teen would do with superpowers: have fun with them! Can he fly? Does he have X-ray vision? Can he shoot lightning out of his hands? Can he skip his social studies test? Shazam sets out to test the limits of his abilities with the joyful recklessness of a child. But he'll need to master these powers quickly in order to fight the deadly forces of evil controlled by Doctor Thaddeus Sivana.",
+    "id": "1a"
+  },
+  {
+    "title": "Film7",
+    "description": "Film2 description",
+    "url": "../../img/mock/2.jpg",
+    "year": "2010",
+    "rating": "4.2",
+    "duration": "152",
+    "overview": "Gathered together by Professor Charles Xavier to protect a world that fears and hates them, the X-Men had fought many battles, been on adventures that spanned galaxies, grappled enemies of limitless might, but none of this could prepare them for the most shocking struggle they would ever face. One of their own members, Jean Grey, has gained power beyond all comprehension, and that power has corrupted her absolutely! Now, they must decide if the life of the woman they cherish is worth the existence of the entire universe!",
+    "id": "2a"
+  },
+  {
+    "title": "Film3",
+    "description": "Film3 description",
+    "url": "../../img/mock/3.jpg",
+    "year": "2003",
+    "rating": "4.3",
+    "duration": "133",
+    "overview": "Venenatis lectus magna fringilla urna porttitor rhoncus. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Amet risus nullam eget felis eget nunc lobortis mattis. Nisl tincidunt eget nullam non nisi est. Massa tincidunt dui ut ornare lectus sit amet est. Commodo elit at imperdiet dui accumsan sit. Massa vitae tortor condimentum lacinia. Suscipit adipiscing bibendum est ultricies integer. Nunc sed velit dignissim sodales ut eu sem integer. Hac habitasse platea dictumst quisque sagittis. Arcu vitae elementum curabitur vitae nunc. Vulputate dignissim suspendisse in est ante. Suspendisse interdum consectetur libero id faucibus nisl. Ut etiam sit amet nisl purus in. Arcu dui vivamus arcu felis bibendum ut tristique. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices eros. Magna etiam tempor orci eu lobortis elementum nibh tellus molestie. At volutpat diam ut venenatis tellus in metus vulputate eu. Consectetur libero id faucibus nisl tincidunt eget nullam. Urna neque viverra justo nec ultrices dui sapien eget.",
+    "id": "3a"
+  },
+  {
+    "title": "Film4",
+    "description": "Film3 description",
+    "url": "../../img/mock/4.jpg",
+    "year": "2015",
+    "rating": "4.4",
+    "duration": "204",
+    "overview": "Viverra mauris in aliquam sem fringilla ut. Eget nullam non nisi est. Nisi vitae suscipit tellus mauris a diam. Eu consequat ac felis donec et odio pellentesque diam. Scelerisque felis imperdiet proin fermentum leo. Eget dolor morbi non arcu risus quis. Sit amet consectetur adipiscing elit duis tristique sollicitudin nibh sit. At varius vel pharetra vel. Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Congue eu consequat ac felis donec et odio. Bibendum at varius vel pharetra vel turpis. Pellentesque diam volutpat commodo sed egestas egestas. Natoque penatibus et magnis dis parturient montes nascetur. Erat velit scelerisque in dictum. Tellus orci ac auctor augue. Turpis egestas pretium aenean pharetra. Amet volutpat consequat mauris nunc congue nisi vitae. Aliquet lectus proin nibh nisl condimentum id. Morbi tristique senectus et netus.",
+    "id": "4a"
+  }
+]}
