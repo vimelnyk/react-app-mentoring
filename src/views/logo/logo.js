@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Switch, Route, Link,
+} from 'react-router-dom';
 import './logo.scss';
 
 const Logo = () => (
-  <Link to="/">
-    <span className="logo">
-      <b>netflix</b>
-      routte
-    </span>
-  </Link>
-
+  <Router>
+    <Link to="/">
+      <span className="logo">
+        <b>netflix</b>
+        routte
+      </span>
+    </Link>
+  </Router>
 );
 
 export default Logo;

@@ -9,6 +9,7 @@ import {
   FILMS_NUMBER,
   FETCH_SINGLE_FILM,
 } from './types';
+import 'isomorphic-fetch';
 
 const apiUrl = 'http://localhost:4000/movies';
 
